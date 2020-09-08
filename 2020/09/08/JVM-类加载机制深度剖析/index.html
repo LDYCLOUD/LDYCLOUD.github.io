@@ -97,6 +97,8 @@
 <p>主类在运行过程中如果使用到其它类，会逐步加载这些类。</p>
 <p>注意，jar包里的类不是一次性全部加载的，是使用到时才加载。</p>
 <p>类加载到使用整个过程有如下几步：</p>
+<a id="more"></a>
+
 <p><strong>加载 &gt;&gt; 验证 &gt;&gt; 准备 &gt;&gt; 解析 &gt;&gt; 初始化 &gt;&gt;</strong> 使用 &gt;&gt; 卸载</p>
 <ul>
 <li>加载：在硬盘上查找并通过IO读入字节码文件，使用到类时才会加载，例如调用类的main()方法，new对象等等，在加载阶段会在内存中生成一个代表这个类的java.lang.Class对象，作为方法区这个类的各种数据的访问入口</li>
@@ -115,7 +117,9 @@
 <li>自定义加载器：负责加载用户自定义路径下的类包</li>
 </ul>
 <p>看一个<strong>类加载器</strong>示例：</p>
-<p>public class TestJDKClassLoader {    public static void main(String[] args){        System.out.println(String.class.getClassLoader());        System.out.println(com.sun.crypto.provider.DESKeyFactory.class.getClassLoader().getClass().getName());        System.out.println(TestJDKClassLoader.class.getClassLoader().getClass().getName());        System.out.println(ClassLoader.getSystemClassLoader().getClass().getName());    } } 运行结果： null    //启动类加载器是C++语言实现，所以打印不出来 sun.misc.Launcher$ExtClassLoader sun.misc.Launcher$AppClassLoader sun.misc.Launcher$AppClassLoader</p>
+<p><code>public class TestJDKClassLoader {</code><br>    <code>public static void main(String[] args){</code><br>        <code>System.out.println(String.class.getClassLoader());</code><br>        <code>System.out.println(com.sun.crypto.provider.DESKeyFactory.class.getClassLoader().getClass().getName());</code><br>        <code>System.out.println(TestJDKClassLoader.class.getClassLoader().getClass().getName());</code><br>        <code>System.out.println(ClassLoader.getSystemClassLoader().getClass().getName());</code><br>    <code>}</code><br><code>}</code></p>
+<p><code>运行结果：</code><br><code>null    //启动类加载器是C++语言实现，所以打印不出来</code><br><code>sun.misc.Launcher$ExtClassLoader
+sun.misc.Launcher$AppClassLoader</code><br><code>sun.misc.Launcher$AppClassLoader</code></p>
 <p><strong>自定义一个类加载器示例</strong>：</p>
 <p>自定义类加载器只需要继承 java.lang.ClassLoader 类，该类有两个核心方法，一个是loadClass(String, boolean)，实现了<strong>双亲委派机制</strong>，大体逻辑</p>
 <ol>
@@ -124,7 +128,47 @@
 <li>如果父加载器及bootstrap类加载器都没有找到指定的类，那么调用当前类加载器的findClass方法来完成类加载。</li>
 </ol>
 <p>还有一个方法是findClass，默认实现是抛出异常，所以我们自定义类加载器主要是<strong>重写**</strong>findClass<strong>**方法</strong>。</p>
-<p>public class MyClassLoaderTest {    static class MyClassLoader extends ClassLoader {        private String classPath;         public MyClassLoader(String classPath) {            this.classPath = classPath;        }         private byte[] loadByte(String name) throws Exception {            name = name.replaceAll(“\.”, “/“);            FileInputStream fis = new FileInputStream(classPath + “/“ + name                    + “.class”);            int len = fis.available();            byte[] data = new byte[len];            fis.read(data);            fis.close();            return data;        }         protected Class&lt;?&gt; findClass(String name) throws ClassNotFoundException {            try {                byte[] data = loadByte(name);                //defineClass将一个字节数组转为Class对象，这个字节数组是class文件读取后最终的字节数组。                return defineClass(name, data, 0, data.length);            } catch (Exception e) {                e.printStackTrace();                throw new ClassNotFoundException();            }        }     }     public static void main(String args[]) throws Exception {        MyClassLoader classLoader = new MyClassLoader(“D:/test”);        Class clazz = classLoader.loadClass(“com.tuling.jvm.User1”);        Object obj = clazz.newInstance();        Method method= clazz.getDeclaredMethod(“sout”, null);        method.invoke(obj, null);        System.out.println(clazz.getClassLoader().getClass().getName());    } } 运行结果： =======自己的加载器加载类调用方法======= com.tuling.jvm.MyClassLoaderTest$MyClassLoader</p>
+<pre><code>    public class MyClassLoaderTest {
+    static class MyClassLoader extends ClassLoader {
+        private String classPath;
+
+    public MyClassLoader(String classPath) {
+        this.classPath = classPath;
+    }
+
+    private byte[] loadByte(String name) throws Exception {
+        name = name.replaceAll(&quot;\\.&quot;, &quot;/&quot;);
+        FileInputStream fis = new FileInputStream(classPath + &quot;/&quot; + name
+                + &quot;.class&quot;);
+        int len = fis.available();
+        byte[] data = new byte[len];
+        fis.read(data);
+        fis.close();
+        return data;
+    }
+
+    protected Class&lt;?&gt; findClass(String name) throws ClassNotFoundException {
+        try {
+            byte[] data = loadByte(name);
+            //defineClass将一个字节数组转为Class对象，这个字节数组是class文件读取后最终的字节数组。
+            return defineClass(name, data, 0, data.length);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ClassNotFoundException();
+        }
+    }
+
+}
+
+public static void main(String args[]) throws Exception {
+    MyClassLoader classLoader = new MyClassLoader(&quot;D:/test&quot;);
+    Class clazz = classLoader.loadClass(&quot;com.tuling.jvm.User1&quot;);
+    Object obj = clazz.newInstance();
+    Method method= clazz.getDeclaredMethod(&quot;sout&quot;, null);
+    method.invoke(obj, null);
+    System.out.println(clazz.getClassLoader().getClass().getName());
+}</code></pre><p>}</p>
+<p>运行结果：<br>=======自己的加载器加载类调用方法=======<br>com.tuling.jvm.MyClassLoaderTest$MyClassLoader</p>
 <p><strong>全盘负责委托机制</strong></p>
 <p>“<strong>全盘负责</strong>”是指当一个ClassLoder装载一个类时，除非显示的使用另外一个ClassLoder，该类所依赖及引用的类也由这个ClassLoder载入。</p>
 <p><strong>双亲委派机制</strong></p>
@@ -139,10 +183,86 @@
 <li>避免类的重复加载：当父亲已经加载了该类时，就没有必要子ClassLoader再加载一次，保证<strong>被加载类的唯一性</strong></li>
 </ul>
 <p>看一个类加载示例：</p>
-<p>package java.lang; public class String {    public static void main(String[] args) {        System.out.println(“<strong><strong><strong>**</strong></strong></strong>My String Class<strong><strong><strong>**</strong></strong></strong>“);    } } 运行结果： 错误: 在类 java.lang.String 中找不到 main 方法, 请将 main 方法定义为:   public static void main(String[] args) 否则 JavaFX 应用程序类必须扩展javafx.application.Application</p>
+<p><code>package java.lang;</code></p>
+<p><code>public class String {</code><br>    <code>public static void main(String[] args) {</code><br>        <code>System.out.println(&quot;**************My String Class**************&quot;);</code><br>    <code>}</code><br><code>}</code></p>
+<p><code>运行结果：</code><br><code>错误: 在类 java.lang.String 中找不到 main 方法, 请将 main 方法定义为:</code><br>   <code>public static void main(String[] args)</code><br><code>否则 JavaFX 应用程序类必须扩展javafx.application.Application</code></p>
 <p>再来一个沙箱安全机制示例，尝试打破双亲委派机制，用自定义类加载器加载我们自己实现的 java.lang.String.class</p>
-<p>public class MyClassLoaderTest {    static class MyClassLoader extends ClassLoader {        private String classPath;         public MyClassLoader(String classPath) {            this.classPath = classPath;        }         private byte[] loadByte(String name) throws Exception {            name = name.replaceAll(“\.”, “/“);            FileInputStream fis = new FileInputStream(classPath + “/“ + name                    + “.class”);            int len = fis.available();            byte[] data = new byte[len];            fis.read(data);            fis.close();            return data;         }         protected Class<?> findClass(String name) throws ClassNotFoundException {            try {                byte[] data = loadByte(name);                return defineClass(name, data, 0, data.length);            } catch (Exception e) {                e.printStackTrace();                throw new ClassNotFoundException();            }        }         /**         * 重写类加载方法，实现自己的加载逻辑，不委派给双亲加载         * @param name         * @param resolve         * @return         * @throws ClassNotFoundException         */        protected Class<?> loadClass(String name, boolean resolve)                throws ClassNotFoundException {            synchronized (getClassLoadingLock(name)) {                // First, check if the class has already been loaded                Class&lt;?&gt; c = findLoadedClass(name);                 if (c == null) {                    // If still not found, then invoke findClass in order                    // to find the class.                    long t1 = System.nanoTime();                    c = findClass(name);                     // this is the defining class loader; record the stats                    sun.misc.PerfCounter.getFindClassTime().addElapsedTimeFrom(t1);                    sun.misc.PerfCounter.getFindClasses().increment();                }                if (resolve) {                    resolveClass(c);                }                return c;            }        }    }     public static void main(String args[]) throws Exception {        MyClassLoader classLoader = new MyClassLoader(“D:/test”);        //尝试用自己改写类加载机制去加载自己写的java.lang.String.class        Class clazz = classLoader.loadClass(“java.lang.String”);        Object obj = clazz.newInstance();        Method method= clazz.getDeclaredMethod(“sout”, null);        method.invoke(obj, null);        System.out.println(clazz.getClassLoader().getClass().getName());    } } 运行结果： java.lang.SecurityException: Prohibited package name: java.lang at java.lang.ClassLoader.preDefineClass(ClassLoader.java:659) at java.lang.ClassLoader.defineClass(ClassLoader.java:758)</p>
-<p><strong>打破双亲委派</strong></p>
+<pre><code>    public class MyClassLoaderTest {
+    static class MyClassLoader extends ClassLoader {
+        private String classPath;
+
+    public MyClassLoader(String classPath) {
+        this.classPath = classPath;
+    }
+
+    private byte[] loadByte(String name) throws Exception {
+        name = name.replaceAll(&quot;\\.&quot;, &quot;/&quot;);
+        FileInputStream fis = new FileInputStream(classPath + &quot;/&quot; + name
+                + &quot;.class&quot;);
+        int len = fis.available();
+        byte[] data = new byte[len];
+        fis.read(data);
+        fis.close();
+        return data;
+
+    }
+
+    protected Class&lt;?&gt; findClass(String name) throws ClassNotFoundException {
+        try {
+            byte[] data = loadByte(name);
+            return defineClass(name, data, 0, data.length);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ClassNotFoundException();
+        }
+    }
+
+    /**
+     * 重写类加载方法，实现自己的加载逻辑，不委派给双亲加载
+     * @param name
+     * @param resolve
+     * @return
+     * @throws ClassNotFoundException
+     */
+    protected Class&lt;?&gt; loadClass(String name, boolean resolve)
+            throws ClassNotFoundException {
+        synchronized (getClassLoadingLock(name)) {
+            // First, check if the class has already been loaded
+            Class&lt;?&gt; c = findLoadedClass(name);
+
+            if (c == null) {
+                // If still not found, then invoke findClass in order
+                // to find the class.
+                long t1 = System.nanoTime();
+                c = findClass(name);
+
+                // this is the defining class loader; record the stats
+                sun.misc.PerfCounter.getFindClassTime().addElapsedTimeFrom(t1);
+                sun.misc.PerfCounter.getFindClasses().increment();
+            }
+            if (resolve) {
+                resolveClass(c);
+            }
+            return c;
+        }
+    }
+}
+
+public static void main(String args[]) throws Exception {
+    MyClassLoader classLoader = new MyClassLoader(&quot;D:/test&quot;);
+    //尝试用自己改写类加载机制去加载自己写的java.lang.String.class
+    Class clazz = classLoader.loadClass(&quot;java.lang.String&quot;);
+    Object obj = clazz.newInstance();
+    Method method= clazz.getDeclaredMethod(&quot;sout&quot;, null);
+    method.invoke(obj, null);
+    System.out.println(clazz.getClassLoader().getClass().getName());
+}
+}
+
+运行结果：
+java.lang.SecurityException: Prohibited package name: java.lang
+    at java.lang.ClassLoader.preDefineClass(ClassLoader.java:659)
+    at java.lang.ClassLoader.defineClass(ClassLoader.java:758)</code></pre><p><strong>打破双亲委派</strong></p>
 <p>以Tomcat类加载为例，Tomcat 如果使用默认的双亲委派类加载机制行不行？</p>
 <p>我们思考一下：Tomcat是个web容器， 那么它要解决什么问题： </p>
 <p>\1. 一个web容器可能需要部署两个应用程序，不同的应用程序可能会<strong>依赖同一个第三方类库的不同版本</strong>，不能要求同一个类库在同一个服务器只有一份，因此要保证每个应用程序的类库都是独立的，保证相互隔离。 </p>
