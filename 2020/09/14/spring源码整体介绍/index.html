@@ -9,7 +9,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-     
+    spring源码整体介绍 |  
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -42,108 +42,8 @@
     
       
     <main class="content on">
-      
-<section class="cover">
-    
-      
-      <a class="forkMe" href="https://github.com/Shen-Yu/hexo-theme-ayer"
-        target="_blank"><img width="149" height="149" src="/images/forkme.png"
-          class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
-    
-  <div class="cover-frame">
-    <div class="bg-box">
-      <img src="/images/cover6.jpg" alt="image frame" />
-    </div>
-    <div class="cover-inner text-center text-white">
-      <h1><a href="/">时间备忘录博客</a></h1>
-      <div id="subtitle-box">
-        
-        <span id="subtitle"></span>
-        
-      </div>
-      <div>
-        
-      </div>
-    </div>
-  </div>
-  <div class="cover-learn-more">
-    <a href="javascript:void(0)" class="anchor"><i class="ri-arrow-down-line"></i></a>
-  </div>
-</section>
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js"></script>
-
-
-<!-- Subtitle -->
-
-  <script>
-    try {
-      var typed = new Typed("#subtitle", {
-        strings: ['面朝大海，春暖花开', '愿你一生努力，一生被爱', '想要的都拥有，得不到的都释怀'],
-        startDelay: 0,
-        typeSpeed: 200,
-        loop: true,
-        backSpeed: 100,
-        showCursor: true
-      });
-    } catch (err) {
-      console.log(err)
-    }
-  </script>
-  
-<div id="main">
-  <section class="outer">
-  
-  
-
-<div class="notice" style="margin-top:50px">
-    <i class="ri-heart-fill"></i>
-    <div class="notice-content" id="broad"></div>
-</div>
-<script type="text/javascript">
-    fetch('https://v1.hitokoto.cn')
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById("broad").innerHTML = data.hitokoto;
-        })
-        .catch(console.error)
-</script>
-
-<style>
-    .notice {
-        padding: 20px;
-        border: 1px dashed #e6e6e6;
-        color: #969696;
-        position: relative;
-        display: inline-block;
-        width: 100%;
-        background: #fbfbfb50;
-        border-radius: 10px;
-    }
-
-    .notice i {
-        float: left;
-        color: #999;
-        font-size: 16px;
-        padding-right: 10px;
-        vertical-align: middle;
-        margin-top: -2px;
-    }
-
-    .notice-content {
-        display: initial;
-        vertical-align: middle;
-    }
-</style>
-  
-  <article class="articles">
-    
-    
-    
-    
-    <article
+      <section class="outer">
+  <article
   id="post-spring源码整体介绍"
   class="article article-type-post"
   itemscope
@@ -154,10 +54,9 @@
     
     <header class="article-header">
        
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/09/14/spring%E6%BA%90%E7%A0%81%E6%95%B4%E4%BD%93%E4%BB%8B%E7%BB%8D/"
-    >spring源码整体介绍</a> 
-</h2>
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  spring源码整体介绍
+</h1>
  
 
     </header>
@@ -165,216 +64,219 @@
     <div class="article-meta">
       <a href="/2020/09/14/spring%E6%BA%90%E7%A0%81%E6%95%B4%E4%BD%93%E4%BB%8B%E7%BB%8D/" class="article-date">
   <time datetime="2020-09-14T05:40:16.000Z" itemprop="datePublished">2020-09-14</time>
-</a>    
+</a>   
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">1.2k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">4 分钟</span>
+        </span>
+    </span>
+</div>
+ 
     </div>
       
+    <div class="tocbot"></div>
+
+
+
+
+  
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="Spring-源码学习整体介绍"><a href="#Spring-源码学习整体介绍" class="headerlink" title="Spring 源码学习整体介绍"></a>Spring 源码学习整体介绍</h2><h3 id="学习原因"><a href="#学习原因" class="headerlink" title="学习原因"></a>学习原因</h3><p>本人已在岗位工作3年之多，随着IT行业的竞争越来越大。大厂等企业要求求职者对底层原理要有一定的理解，并且有读和理解底层源码的能力。故开启了自己的spring源码之旅。</p> 
-      <a class="article-more-link" href="/2020/09/14/spring%E6%BA%90%E7%A0%81%E6%95%B4%E4%BD%93%E4%BB%8B%E7%BB%8D/"
-        >阅读更多...</a
-      >
-       
+  <h2 id="Spring-源码学习整体介绍"><a href="#Spring-源码学习整体介绍" class="headerlink" title="Spring 源码学习整体介绍"></a>Spring 源码学习整体介绍</h2><h3 id="学习原因"><a href="#学习原因" class="headerlink" title="学习原因"></a>学习原因</h3><p>本人已在岗位工作3年之多，随着IT行业的竞争越来越大。大厂等企业要求求职者对底层原理要有一定的理解，并且有读和理解底层源码的能力。故开启了自己的spring源码之旅。</p>
+<a id="more"></a>
+
+<p>在学习过程中，虽然很大时间是无聊枯燥的。但随着对源码的理解，会对自己有很大的提升，具体感悟如下：</p>
+<ul>
+<li>加深对使用的理解，开发过程中可以按照自己的想法随意修改。（在类定义或者创建以及在方法的前后进行自己的处理）；</li>
+<li>应对面试。（你要牛掰的话，可以手撕面试官）；</li>
+<li>学习良好的代码习惯，在方法的命名和模式的使用上会大大提升；</li>
+<li>很多框架都需要和Spring整合，可以明白注入启动的时机；</li>
+<li>从容应对各种关于框架方面的内容；</li>
+</ul>
+<h3 id="学习心态"><a href="#学习心态" class="headerlink" title="学习心态"></a>学习心态</h3><ul>
+<li>spring源码有一百多万行，不需要明白每一行；</li>
+<li>明确主线和分支路线学习，先主后从；</li>
+<li>很多方法里面代码很多很长，我们未必会理解，可以当作一个黑盒方法，明白具体功能即可；</li>
+<li>更多的是可以打开一扇入门Spring源码以及框架设计的大门；</li>
+</ul>
+<h3 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h3><ul>
+<li>具备java编程基础</li>
+<li>会用spring框架进行开发</li>
+</ul>
+<h3 id="Spring体系架构-基于4-x"><a href="#Spring体系架构-基于4-x" class="headerlink" title="Spring体系架构(基于4.x)"></a>Spring体系架构(基于4.x)</h3><p><img src="./spring4x.png" alt="spring4x"></p>
+<h4 id="1、Core-Container-核心容器"><a href="#1、Core-Container-核心容器" class="headerlink" title="1、Core Container(核心容器)"></a>1、Core Container(核心容器)</h4><p>该模块主要包含Core、Beans、Context和SpEL模块。其中Core和Beans是整个框架最基础的部分，提供IOC和依赖注入特性。这里最重要的概念就是 BeanFactory，提供了以Factory模式的实现来消除对程序性<br> 单例模式。</p>
+<p>Core:模块主要包含Spring框架最基本的核心工具类，Core是其他组件的基础核心。 Beans:模块主要包含访问配置文件、创建/管理Bean以及IOC/DI相关的类。 Context:继承了Beans的特性，主要为Spring提供大量的扩展，如国际化、事件机制、资源加载等待。ApplicationContext接口是Context模块的</p>
+<p>关键。 SpEL:模块提供了一个强大的语言表达式。</p>
+<p>———————————————————————————————————————————————————————</p>
+<h4 id="2、AOP-and-Instrumentation"><a href="#2、AOP-and-Instrumentation" class="headerlink" title="2、AOP and Instrumentation"></a>2、AOP and Instrumentation</h4><p>提供符合AOP Alliance标准的面向切面编程的实现，可以让你定义如方法拦截器和切点，从而降低程序之间的耦合性。</p>
+<p>AspectJ模块:提供了与AspectJ的集成 。</p>
+<p>Instrumentation模块:提供用于某些应用程序服务器的类工具支持和类加载器实现 。 ———————————————————————————————————————————————————————</p>
+<h4 id="3、Messaging"><a href="#3、Messaging" class="headerlink" title="3、Messaging"></a>3、Messaging</h4><p> 该模块具有来自Spring Integration项目的关键抽象，如Message，MessageChannel，MessageHandler等。它们构成基于消息的应用程序的基础。该模块 还包括一组注释，用于将消息映射到方法，类似于基于Spring MVC注释的编程模型。 ———————————————————————————————————————————————————————</p>
+<h4 id="4、Data-Access-Integration"><a href="#4、Data-Access-Integration" class="headerlink" title="4、Data Access/Integration"></a>4、Data Access/Integration</h4><p> 数据访问/集成层由JDBC，ORM，OXM，JMS和事务模块组成。</p>
+<p>JDBC模块:提供了JDBC抽象层，从而无需进行繁琐的JDBC编码和数据库特定错误代码(不同数据代码可能不同)的解析。 事务模块:支持对实现特殊接口的类以及所有POJO(普通Java对象)进行编程和声明式事务管理。 ORM模块:该模块为当前流行的ORM(包括JPA，JDO和Hibernate)提供了集成层。使用ORM模块，可以将所有这些O/R映射框架与Spring提供</p>
+<p>的所有功能结合使用，如前面提到的事务管理功能。<br> OXM模块:提供了一个抽象层，该抽象层支持Object/ XML映射实现，例如JAXB，Castor，XMLBeans，JiBX和XStream。</p>
+<h4 id="5、Web"><a href="#5、Web" class="headerlink" title="5、Web"></a>5、Web</h4><p>Web上下文模块建立在应用程序上下文模块之上，为基于Web的应用程序提供上下文支持。该模块包含Web、WebMVC、Web Socket和Web­Porlet模块。</p>
+<p>Web模块:提供了基本的面向Web的集成功能，如文件上传功能以及使用Servlet监听器和面向Web的应用程序上下文对IoC容器的初始化。</p>
+<p>WebMVC模块(也称为Web­Servlet模块):包含基于Spring的Model­View­Controller(MVC)支持和针对Web应用程序的Rest Web服务实 现。</p>
+<p>Web­Portlet 模块(也称为Web­Portlet模块):提供Portlet环境中的MVC实现。 ——————————————————————————————————————————————————————— </p>
+<h4 id="6、Test"><a href="#6、Test" class="headerlink" title="6、Test"></a>6、Test</h4><p> 该模块支持使用JUnit或TestNG对Spring组件进行单元测试和集成测试。</p>
+<h3 id="加载类的简单模型"><a href="#加载类的简单模型" class="headerlink" title="加载类的简单模型"></a>加载类的简单模型</h3><p><img src="./spring01%E5%88%86%E6%9E%90.jpg" alt="spring01分析"></p>
+<p>注：spring自带IOC，AOP是在BeanPostProcessor时放入的，如果自己写框架也可以通过这种方式放入。（mybatis也是这样放进去的）</p>
+<p>这个图是我学习的一个整体模型，其中IOC和AOP以及事物的具体细节没有体现出。具体细节要在后面源码处分析。</p>
+ 
       <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          打赏
+        </div>
+      </div>
       
     </div>
     
 
     <!-- copyright -->
     
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+        </li>
+      </ul>
+    </div>
+    
     <footer class="article-footer">
        
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/09/14/spring%E6%BA%90%E7%A0%81%E6%95%B4%E4%BD%93%E4%BB%8B%E7%BB%8D/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/" rel="tag">spring</a></li></ul>
 
     </footer>
   </div>
 
-    
- 
    
-</article>
-
+  <nav class="article-nav">
     
-    <article
-  id="post-JVM-类加载机制深度剖析"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
     
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/09/08/JVM-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90/"
-    >JVM-类加载机制深度剖析</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2020/09/08/JVM-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90/" class="article-date">
-  <time datetime="2020-09-08T08:20:32.000Z" itemprop="datePublished">2020-09-08</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p><strong>1、类加载过程</strong></p>
-<p>多个java文件经过编译打包生成可运行jar包，最终由java命令运行某个主类的main函数启动程序，这里首先需要通过<strong>类加载器</strong>把主类加载到JVM。</p>
-<p>主类在运行过程中如果使用到其它类，会逐步加载这些类。</p>
-<p>注意，jar包里的类不是一次性全部加载的，是使用到时才加载。</p>
-<p>类加载到使用整个过程有如下几步：</p> 
-      <a class="article-more-link" href="/2020/09/08/JVM-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
+      <a href="/2020/09/08/JVM-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">JVM-类加载机制深度剖析</div>
+      </a>
     
+  </nav>
 
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jvm/" rel="tag">jvm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag">后端</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
    
-</article>
-
-    
-    <article
-  id="post-synchronized详解"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/09/08/synchronized%E8%AF%A6%E8%A7%A3/"
-    >synchronized详解</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2020/09/08/synchronized%E8%AF%A6%E8%A7%A3/" class="article-date">
-  <time datetime="2020-09-08T07:30:10.000Z" itemprop="datePublished">2020-09-08</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="synchronized详解"><a href="#synchronized详解" class="headerlink" title="synchronized详解"></a>synchronized详解</h2><h3 id="设计同步器的意义"><a href="#设计同步器的意义" class="headerlink" title="设计同步器的意义"></a>设计同步器的意义</h3><p>多线程编程中，有可能会出现多个线程同时访问同一个共享、可变资源的情况，这个资源我们称之其为临界资源;这种资源可能是:</p>
-<p>对象、变量、文件等。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">共享:资源可以由多个线程同时访问</span><br><span class="line">可变:资源可以在其生命周期内被修改</span><br></pre></td></tr></table></figure>
-
-<p>引出的问题: 由于线程执行的过程是不可控的，所以需要采用同步机制来协同对对象可变状态的访问!</p> 
-      <a class="article-more-link" href="/2020/09/08/synchronized%E8%AF%A6%E8%A7%A3/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag">后端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" rel="tag">并发编程</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-   
-</article>
-
-    
-    <article
-  id="post-CPU缓存一致性协议MESI"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/09/08/CPU%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7%E5%8D%8F%E8%AE%AEMESI/"
-    >CPU缓存一致性协议MESI</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2020/09/08/CPU%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7%E5%8D%8F%E8%AE%AEMESI/" class="article-date">
-  <time datetime="2020-09-08T03:17:43.000Z" itemprop="datePublished">2020-09-08</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="CPU高速缓存（Cache-Memory）"><a href="#CPU高速缓存（Cache-Memory）" class="headerlink" title="CPU高速缓存（Cache Memory）"></a>CPU高速缓存（Cache Memory）</h2><h3 id="CPU为何要有高速缓存"><a href="#CPU为何要有高速缓存" class="headerlink" title="CPU为何要有高速缓存"></a>CPU为何要有高速缓存</h3><p>CPU在摩尔定律的指导下以每18个月翻一番的速度在发展，然而内存和硬盘的发展速度远远不及CPU。这就造成了高性能能的内存和硬盘价格及其昂贵。然而CPU的高度运算需要高速的数据。为了解决这个问题，CPU厂商在CPU中内置了少量的高速缓存以解决I\O速度和CPU运算速度之间的不匹配问题。</p>
-<p>在CPU访问存储设备时，无论是存取数据抑或存取指令，都趋于聚集在一片连续的区域中，这就被称为局部性原理。</p>
-<blockquote>
-<p><strong>时间局部性（Temporal Locality）</strong>：如果一个信息项正在被访问，那么在近期它很可能还会被再次访问。</p>
-</blockquote>
-<p>比如循环、递归、方法的反复调用等。</p>
-<blockquote>
-<p><strong>空间局部性（Spatial Locality）</strong>：如果一个存储器的位置被引用，那么将来他附近的位置也会被引用。</p>
-</blockquote>
-<p>比如顺序执行的代码、连续创建的两个对象、数组等。</p> 
-      <a class="article-more-link" href="/2020/09/08/CPU%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7%E5%8D%8F%E8%AE%AEMESI/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag">后端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" rel="tag">并发编程</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-   
-</article>
-
-    
-  </article>
-  
-
-  
-</section>
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
 </div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "",
+    app_key: "",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
 
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+     
+</article>
+
+</section>
       <footer class="footer">
   <div class="outer">
     <ul>
@@ -535,6 +437,23 @@
 <script src="/js/lazyload.min.js"></script>
 
 <!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
